@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const routes_1 = __importDefault(require("./routes/routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-// app.use(json())
+app.use(express_1.default.json());
 const port = process.env.PORT || 3000;
 // app.get('/', (req: Request, res: Response) => {
 //   res.send('My Typescript express server is now running okay and fine')

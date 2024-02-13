@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+//import {models} from "./Configurations/dbconfig";
+const errorMiddleware_1 = require("./Middlewares/errorMiddleware");
+const UserRoutes_1 = __importDefault(require("./routes/UserRoutes"));
+dotenv_1.default.config();
+const port = process.env.PORT;
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, cookie_parser_1.default)());
+app.use('/api/user', UserRoutes_1.default);
+app.use(errorMiddleware_1.notFound);
+app.use(errorMiddleware_1.errorHandler);
+app.listen(port, () => console.log(`Server running on ${port}`));
